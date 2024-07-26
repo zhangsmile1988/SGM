@@ -1,41 +1,22 @@
 for i in G.nodes():
     nodes_list.append(i)
+    f1 = 0 
+    f2 = 0
+    k4 = 0
+    d = 0
+    I = 0
+    F = 0
+    neiks1 = 0
     j = G.neighbors(i)
-    for j1 in j:        
-        neiks = neiks + c[j1]
-        j2 = G.neighbors(j1)
-        if not j1 == i:
-            a.append(j1)
-        for j3 in j2:
-            if not j3 == i:
-                a.append(j3)
-        b = list(set(a))
-    for s in b:
-        if not s == i:
-            y = G.neighbors(s)
-            for y1 in y:
-                y2 = G.neighbors(y1)
-                if not y1 == s:
-                    q.append(y1)
-                for y3 in y2:
-                    if not y3 == s:
-                        q.append(y3)
-                p=list(set(q))
-            neigh_M = set(b)
-            neigh_N = set(p)
-            neighborsx = neigh_M & neigh_N
-            neiCount = len(neighborsx)
-            f1 = dx[i]*math.log(c[i]+1,2)
-            f2 = dx[s]*math.log(c[s]+1,2)
-            f = f1 * f2
-            k2 =1 - 1/(neiCount+1) 
-            k1 = (neiks/(1-ec[i]))**2
-            k3 = 2*k1+math.exp(k2)
-            try:
-                d = nx.shortest_path_length(G, i, s)
-            except nx.NetworkXNoPath:
-                d = maxd               
-            F = k3* f1 * f2/ (d ** 2)
-            I = I+F
+    for j1 in j:
+        neiks1 = neiks1 + c[j1]
+    for s in combined_neighbors[i]:
+        if not s == i: 
+            f1 = dx[i]*math.log(degree_sums[i] + 1, 2)
+            f2 = dx[s]*math.log(degree_sums[s] + 1, 2)
+            k4 = (neiks1)**2
+            d = df.loc[i, s]
+            F = k4*f1*(2*average_clustering*f2+1)/d**2
+            I = I + F
     list1.append(I)
-dic=dict(zip(nodes_list,list1))
+dic = dict(zip(nodes_list, list1))
